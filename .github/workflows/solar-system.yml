@@ -41,7 +41,9 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout Repository
-          uses: action/checkout@v4
+          uses: actions/checkout@v4
+          with:
+            sparse-checkout: .
 
         - name: setup NodeJS of version 18
           uses: actions/setup-node@v4
