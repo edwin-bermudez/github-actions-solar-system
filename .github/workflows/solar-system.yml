@@ -138,3 +138,8 @@ jobs:
             INGRESS_IP: '${{ env.INGRESS_IP }}'
 
         - run: cat kubernetes/development/*.yaml
+    integration-test:
+      needs: dev-deploy
+      uses: ./.github/worflows/reusable-worflow.yml
+      with:
+        ingress-url: {{ needs.dev-deploy.outputs.APP_INGRESS_URL }}
