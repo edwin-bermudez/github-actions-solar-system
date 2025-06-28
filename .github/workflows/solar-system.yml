@@ -111,16 +111,21 @@ jobs:
           uses: azure/setup-kubectl@v4
           with:
             version: latest
-
+        
+        - name: SSave kubeconfig
+          run: |
+            echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yaml
+        
         - name: Set context kubernetes
           uses: azure/k8s-set-context@v4
           with:
             method: kubeconfig
-            kubeconfig: '${{ secrets.KUBECONFIG }}'
+            kubeconfig: kubeconfig.yaml
         
         - name: Verify connection to cluster k8s
           run: |
             kubectl version
+            kubectl get nodes
 
         
         #- name: fetch the NGINX INGRESS CONTROLLER IP Address
