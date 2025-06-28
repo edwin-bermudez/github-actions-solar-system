@@ -110,16 +110,19 @@ jobs:
         - name: Azure kubectl client
           uses: azure/setup-kubectl@v4
           with:
-            version: 'v1.28.1'
+            version: latest
 
         - name: Set context kubernetes
           uses: azure/k8s-set-context@v4
           with:
             method: kubeconfig
             kubeconfig: '${{ secrets.KUBECONFIG }}'
-            context: default
         
         - name: Verify connection to cluster k8s
           run: |
             kubectl version -o yaml
-            #kubectl get nodes
+            kubectl get nodes
+        
+        #- name: fetch the NGINX INGRESS CONTROLLER IP Address
+        #  run: |
+        #     INGRESS_IP = 
