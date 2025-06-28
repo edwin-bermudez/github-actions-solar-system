@@ -122,4 +122,4 @@ jobs:
         - name: Verify connection to cluster k8s
           run: |
             kubectl version -o yaml
-            kubectl get nodes
+            #kubectl get nodes
