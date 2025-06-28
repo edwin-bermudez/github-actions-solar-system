@@ -112,23 +112,15 @@ jobs:
           with:
             version: 'v1.28.1'
         
-        - name: Save kubeconfig
-          run: |
-            echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yaml
-        
         - name: Set context kubernetes
           uses: azure/k8s-set-context@v4
           with:
             method: kubeconfig
-            kubeconfig: 'kubeconfig.yaml'
+            kubeconfig: '${{ secrets.KUBECONFIG }}'
         
         - name: Verify connection to cluster k8s
           run: |
-            kubectl version
-            kubectl get nodes
-          env:
-            KUBECONFIG: kubeconfig.yaml
-
+            kubectl version -o yaml
         
         #- name: fetch the NGINX INGRESS CONTROLLER IP Address
         #  run: |
