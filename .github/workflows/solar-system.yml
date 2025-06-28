@@ -120,8 +120,8 @@ jobs:
         
         - name: Verify connection to cluster k8s
           run: |
-            kubectl version -o yaml
-            kubectl get nodes
+            kubectl version
+
         
         #- name: fetch the NGINX INGRESS CONTROLLER IP Address
         #  run: |
