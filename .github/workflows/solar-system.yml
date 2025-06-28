@@ -101,6 +101,8 @@ jobs:
       name: Development Deployment
       needs: docker
       runs-on: ubuntu-latest
+      environment:
+        name: development
       steps:
         - name: Checkout Repository
           uses: actions/checkout@v4
@@ -108,13 +110,13 @@ jobs:
         - name: Azure kubectl client
           uses: azure/setup-kubectl@v4
           with:
-            version: latest
+            version: 'v1.28.1'
 
         - name: Set context kubernetes
           uses: azure/k8s-set-context@v4
           with:
             method: kubeconfig
-            kubeconfig: ${{ secrets.KUBECONFIG }}
+            kubeconfig: '${{ secrets.KUBECONFIG }}'
             context: default
         
         - name: Verify connection to cluster k8s
